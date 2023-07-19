@@ -38,7 +38,6 @@ int bluekey = KEY_B;
 int yellowkey = KEY_Y;
 unsigned mouseattack = MOUSEB_LEFT;
 unsigned mousenextweap = MOUSEB_RIGHT;
-int mousesens = 64;
 
 void makecollareas(void)
 {

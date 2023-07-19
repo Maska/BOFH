@@ -590,7 +590,6 @@ void loadconfig(void)
 	fread(&mouseattack, sizeof mouseattack, 1, handle);
 	fread(&mousenextweap, sizeof mousenextweap, 1, handle);
 	fread(&mousenextweap, sizeof mousenextweap, 1, handle);
-	fread(&mousesens,   sizeof mousesens,   1, handle);
 	fclose(handle);
 }
 
@@ -624,7 +623,6 @@ void saveconfig(void)
  	fwrite(&mouseattack, sizeof mouseattack, 1, handle);
 	fwrite(&mousenextweap, sizeof mousenextweap, 1, handle);
 	fwrite(&mouseprevweap, sizeof mouseprevweap, 1, handle);
-	fwrite(&mousesens,   sizeof mousesens,   1, handle);
 	fclose(handle);
 }
 
@@ -922,8 +920,6 @@ int optionsmenu(void)
 		}
 		if (key == KEY_UP) move -= 64;
 		if (key == KEY_DOWN) move += 64;
-		if (key == KEY_LEFT) mousesens += 1;
-		if (key == KEY_RIGHT) mousesens -=1;
 
 		move += mousemovey;
 		while ((move >= 22*64) || (move < 0))
@@ -931,9 +927,6 @@ int optionsmenu(void)
 			if (move >= 22*64) move -= 22*64;
 			if (move < 0) move += 22*64;
 		}
-
-		if (mousesens > 99) mousesens = 99;
-		if (mousesens < 1) mousesens = 1;
 
 		keyselect = move / 64;
 
@@ -948,15 +941,11 @@ int optionsmenu(void)
 			if (((c == keyselect) && (flash & 16)) || (c != keyselect))
 			{
 				if (c < 19) txt_print(10, (10*c)+10, SPR_SMALLFONTS, keytext[c]);
-				else txt_print(190, 10*(c-16), SPR_SMALLFONTS, keytext[c]);
+				else txt_print(190, 10*(c-18), SPR_SMALLFONTS, keytext[c]);
 			}
 		}
-		txt_print(190, 10, SPR_SMALLFONTS, "MOUSE SENSITIVITY:");
-                sprintf(textbuf, "%d", -(mousesens - 100)); 
-		txt_print(230, 20, SPR_SMALLFONTS, textbuf);
 		txt_print(145, 170, SPR_SMALLFONTS, "USE UP & DOWN TO NAVIGATE");
-		txt_print(145, 180, SPR_SMALLFONTS, "LEFT & RIGHT TO CHANGE MOUSE SENS");
-		txt_print(145, 190, SPR_SMALLFONTS, "ENTER TO SELECT AND ESC TO EXIT");
+		txt_print(145, 180, SPR_SMALLFONTS, "ENTER TO SELECT AND ESC TO EXIT");
 		gfx_updatepage();
 	}
 }

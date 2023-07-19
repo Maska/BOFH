@@ -24,4 +24,3 @@ int yellowkey;
 unsigned mouseattack;
 unsigned mousenextweap;
 unsigned mouseprevweap;
-int mousesens;
