@@ -1237,19 +1237,29 @@ void playercontrol(ACTOR *aptr)
                         want_strafe = 0;
                 }
         }
-        if (!speedcheat)
+        if (controlscheme == CTRL_ABSOLUTE)
+        {
+                aptr->speedx += want_strafe * 4;
+                aptr->speedy -= want_walk   * 4;
+                aptr->angle = findangle(aptr->x - xpos, aptr->y - ypos,
+                                        mouseposx * DEC, mouseposy * DEC);
+        }
+        else
         {
                 aptr->speedx += (sintable[aptr->angle    ] * want_walk   / 64);
                 aptr->speedy -= (sintable[aptr->angle+COS] * want_walk   / 64);
                 aptr->speedx += (sintable[aptr->angle+COS] * want_strafe / 64);
                 aptr->speedy += (sintable[aptr->angle    ] * want_strafe / 64);
+
+                aptr->angle += aptr->angularspeed;
+                aptr->angle += (sintable[aptr->angle    ] * avgmovey/2 / mousesens +
+                                sintable[aptr->angle+COS] * avgmovex/2 / mousesens);
+                aptr->angle &= 0x3ff;
         }
-        else
+        if (speedcheat)
         {
-                aptr->speedx += (sintable[aptr->angle    ] * want_walk   / 32);
-                aptr->speedy -= (sintable[aptr->angle+COS] * want_walk   / 32);
-                aptr->speedx += (sintable[aptr->angle+COS] * want_strafe / 32);
-                aptr->speedy += (sintable[aptr->angle    ] * want_strafe / 32);
+                aptr->speedx *= 2;
+                aptr->speedy *= 2;
         }
 
         /* Friction */
@@ -1280,9 +1290,6 @@ void playercontrol(ACTOR *aptr)
                 }
         }
 
-        aptr->angle += aptr->angularspeed;
-        aptr->angle += (sintable[aptr->angle    ] * avgmovey/2 / mousesens +
-                        sintable[aptr->angle+COS] * avgmovex/2 / mousesens);
         aptr->angle &= 0x3ff;
         {
                 int speed = squareroot(aptr->speedx * aptr->speedx +
@@ -3290,5 +3297,4 @@ void checkdoorclose(ACTOR *aptr, int oldx, int oldy)
                 closedoor(oldx, oldy);
         }
 }
-
 
