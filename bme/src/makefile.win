@@ -65,7 +65,7 @@ $(PREFIX)infedit$(SUFFIX): infedit.o fileio.o cfgfile.o mapdata.o $(PREFIX)libbm
 	$(CC) -o $@ $^ $(LIBS) -mwindows
 
 $(PREFIX)bmeplay$(SUFFIX): bmeplay.o $(PREFIX)libbme.a
-	$(CC) -o $@ $^ $(LIBS) 
+	$(CC) -o $@ $^ $(LIBS)
 
 $(PREFIX)datafile$(SUFFIX): datafile.o fileio.o
 	$(CC) -o $@ $^

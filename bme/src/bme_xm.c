@@ -181,7 +181,7 @@ typedef struct
     Uint8 tremorstatus;
 } TRACK;
 
-// Prototypes 
+// Prototypes
 static int init_xmplayer(void);
 static void xmplayer(void);
 static void startnewnote(TRACK *tptr, CHANNEL *chptr);
@@ -189,7 +189,7 @@ static void changeinstrument(TRACK *tptr);
 static void extendedcommand(TRACK *tptr, CHANNEL *chptr);
 static int getamigaperiod(int note, int finetune);
 
-// XM linear frequency table 
+// XM linear frequency table
 static unsigned linearfreqtable[] =
 {
     535232, 534749, 534266, 533784, 533303, 532822, 532341, 531861, 531381, 530902,
@@ -271,7 +271,7 @@ static unsigned linearfreqtable[] =
     269555, 269312, 269069, 268826, 268583, 268341, 268099, 267857
 };
 
-// XM Amiga frequency table. 
+// XM Amiga frequency table.
 static unsigned amigafreqtable[] =
 {
     907, 900, 894, 887, 881, 875, 868, 862, 856, 850, 844, 838, 832, 826, 820, 814,
@@ -283,7 +283,7 @@ static unsigned amigafreqtable[] =
     453, 450, 447, 443, 440, 437, 434, 431, 428
 };
 
-// Variables and structures 
+// Variables and structures
 static XM_ID xm_id;
 static XM_HEADER xm_header;
 static XM_PATTERN load_pattern;
@@ -354,7 +354,7 @@ int snd_loadxm(char *name)
         io_close(handle);
         return BME_ERROR;
     }
-    xm_id.idbyte = 0x0; // Serves as the songname endzero from now on 
+    xm_id.idbyte = 0x0; // Serves as the songname endzero from now on
     if (xm_id.version < 0x103)
     {
         io_close(handle);
@@ -440,38 +440,38 @@ int snd_loadxm(char *name)
             {
                 Uint8 control = *packptr++;
                 packleft--;
-                // Packed? 
+                // Packed?
                 if (control & 0x80)
                 {
-                    // Note? 
+                    // Note?
                     if (control & 0x01)
                     {
                         *unpackptr++ = *packptr++;
                         packleft--;
                     }
                     else unpackptr++;
-                    // Instrument? 
+                    // Instrument?
                     if (control & 0x02)
                     {
                         *unpackptr++ = *packptr++;
                         packleft--;
                     }
                     else unpackptr++;
-                    // Volume column? 
+                    // Volume column?
                     if (control & 0x04)
                     {
                         *unpackptr++ = *packptr++;
                         packleft--;
                     }
                     else unpackptr++;
-                    // Effect? 
+                    // Effect?
                     if (control & 0x08)
                     {
                         *unpackptr++ = *packptr++;
                         packleft--;
                     }
                     else unpackptr++;
-                    // Effect parameter? 
+                    // Effect parameter?
                     if (control & 0x10)
                     {
                         *unpackptr++ = *packptr++;
@@ -481,11 +481,11 @@ int snd_loadxm(char *name)
                 }
                 else
                 {
-                    *unpackptr++ = control; // Note 
-                    *unpackptr++ = *packptr++; // Instrument 
-                    *unpackptr++ = *packptr++; // Volume c. 
-                    *unpackptr++ = *packptr++; // Effect 
-                    *unpackptr++ = *packptr++; // Effect p. 
+                    *unpackptr++ = control; // Note
+                    *unpackptr++ = *packptr++; // Instrument
+                    *unpackptr++ = *packptr++; // Volume c.
+                    *unpackptr++ = *packptr++; // Effect
+                    *unpackptr++ = *packptr++; // Effect p.
                     packleft -= 4;
                 }
             }
@@ -558,7 +558,7 @@ int snd_loadxm(char *name)
             {
                 for (s = 0; s < instr_ptr->volenvpoints; s++)
                 {
-                    // Paranoid check 
+                    // Paranoid check
                     if (instr_ptr->volenv[s].x > 324) instr_ptr->volenv[s].x = 324;
                 }
                 for (s = 0; s < instr_ptr->volenvpoints - 1; s++)
@@ -587,7 +587,7 @@ int snd_loadxm(char *name)
                 instr_ptr->volsustpoint = instr_ptr->volenv[instr_ptr->volsustpoint].x;
                 instr_ptr->volloopstart = instr_ptr->volenv[instr_ptr->volloopstart].x;
                 instr_ptr->volloopend = instr_ptr->volenv[instr_ptr->volloopend].x;
-                // If zero length loop, must deactivate loop 
+                // If zero length loop, must deactivate loop
                 if (instr_ptr->volloopstart == instr_ptr->volloopend)
                 {
                     instr_ptr->volenvflags &= ~ENV_LOOP;
@@ -597,7 +597,7 @@ int snd_loadxm(char *name)
             {
                 for (s = 0; s < instr_ptr->panenvpoints; s++)
                 {
-                    // Paranoid check 
+                    // Paranoid check
                     if (instr_ptr->panenv[s].x > 324) instr_ptr->panenv[s].x = 324;
                 }
                 for (s = 0; s < instr_ptr->panenvpoints - 1; s++)
@@ -626,7 +626,7 @@ int snd_loadxm(char *name)
                 instr_ptr->pansustpoint = instr_ptr->panenv[instr_ptr->pansustpoint].x;
                 instr_ptr->panloopstart = instr_ptr->panenv[instr_ptr->panloopstart].x;
                 instr_ptr->panloopend = instr_ptr->panenv[instr_ptr->panloopend].x;
-                // If zero length loop, must deactivate loop 
+                // If zero length loop, must deactivate loop
                 if (instr_ptr->panloopstart == instr_ptr->panloopend)
                 {
                     instr_ptr->panenvflags &= ~ENV_LOOP;
@@ -670,7 +670,7 @@ int snd_loadxm(char *name)
 
                 // Hop over extra data in sample header
 
-                io_lseek(handle, instr_ptr->sampleheadersize + cpos, SEEK_SET);                  
+                io_lseek(handle, instr_ptr->sampleheadersize + cpos, SEEK_SET);
 
                 // If looplength is zero, loop must be de-
                 // activated
@@ -1062,13 +1062,13 @@ static void xmplayer(void)
                 case 0x0:
                 break;
 
-                // Set volume 
+                // Set volume
                 case 0x1:
                 case 0x2:
                 case 0x3:
                 case 0x4:
                 case 0x5:
-                // Applies only if there isn't notedelay 
+                // Applies only if there isn't notedelay
                 if ((tptr->effect != 0xe) || (tptr->nybble1 != 0xd) || (tptr->nybble2 == 0))
                 {
                     tptr->notevol = tptr->voleffect - 0x10;
@@ -1077,21 +1077,21 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Fine volslide down 
+                // Fine volslide down
                 case 0x8:
                 tptr->notevol -= tptr->voleffect & 0xf;
                 if (tptr->notevol < 0) tptr->notevol = 0;
                 tptr->vol = tptr->notevol;
                 break;
 
-                // Fine volslide up 
+                // Fine volslide up
                 case 0x9:
                 tptr->notevol += tptr->voleffect & 0xf;
                 if (tptr->notevol > 64) tptr->notevol = 64;
                 tptr->vol = tptr->notevol;
                 break;
 
-                // Set vibrato speed 
+                // Set vibrato speed
                 case 0xa:
                 if (tptr->voleffect & 0xf)
                 {
@@ -1099,7 +1099,7 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Vibrato 
+                // Vibrato
                 case 0xb:
                 if (tptr->voleffect & 0xf)
                 {
@@ -1107,16 +1107,16 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Set panning 
+                // Set panning
                 case 0xc:
-                // Applies only if there isn't notedelay 
+                // Applies only if there isn't notedelay
                 if ((tptr->effect != 0xe) || (tptr->nybble1 != 0xd) || (tptr->nybble2 == 0))
                 {
                     tptr->notepanning = (tptr->voleffect & 0xf) << 4 | (tptr->voleffect & 0xf);
                 }
                 break;
 
-                // Toneportamento 
+                // Toneportamento
                 case 0xf:
                 if (tptr->voleffect & 0xf)
                 {
@@ -1132,39 +1132,39 @@ static void xmplayer(void)
                 case 0x0:
                 break;
 
-                // Set portamento speed up 
+                // Set portamento speed up
                 case 0x1:
                 if (tptr->effectdata) tptr->portaspeedup = tptr->effectdata;
                 break;
 
-                // Set portamento speed down 
+                // Set portamento speed down
                 case 0x2:
                 if (tptr->effectdata) tptr->portaspeeddown = tptr->effectdata;
                 break;
 
-                // Set TP. speed 
+                // Set TP. speed
                 case 0x3:
                 if (tptr->effectdata) tptr->tpspeed = tptr->effectdata;
                 break;
 
-                // Set vibrato 
+                // Set vibrato
                 case 0x4:
                 if (tptr->nybble1) tptr->vibratospeed = tptr->nybble1;
                 if (tptr->nybble2) tptr->vibratodepth = tptr->nybble2;
                 break;
 
-                // Set tremolo 
+                // Set tremolo
                 case 0x7:
                 if (tptr->nybble1) tptr->tremolospeed = tptr->nybble1;
                 if (tptr->nybble2) tptr->tremolodepth = tptr->nybble2;
                 break;
 
-                // Set Panning 
+                // Set Panning
                 case 0x8:
                 tptr->notepanning = tptr->effectdata;
                 break;
 
-                // Volume slide speed set 
+                // Volume slide speed set
                 case 0x5:
                 case 0x6:
                 case 0xa:
@@ -1175,13 +1175,13 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Pos. jump 
+                // Pos. jump
                 case 0xb:
                 xm_line = pattptr->rows - 1;
                 xm_pos = tptr->effectdata - 1;
                 break;
 
-                // Set volume 
+                // Set volume
                 case 0xc:
                 tptr->notevol = tptr->effectdata;
                 if (tptr->notevol < 0) tptr->notevol = 0;
@@ -1189,7 +1189,7 @@ static void xmplayer(void)
                 tptr->vol = tptr->notevol;
                 break;
 
-                // Pattern break 
+                // Pattern break
                 case 0xd:
                 if (!xm_patternbreak)
                 {
@@ -1199,24 +1199,24 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Extended command 
+                // Extended command
                 case 0xe:
                 extendedcommand(tptr, chptr);
                 break;
 
-                // Set tempo 
+                // Set tempo
                 case 0xf:
                 if (tptr->effectdata < 32) xm_ticktempo = tptr->effectdata;
                 else snd_bpmtempo = tptr->effectdata;
                 break;
 
-                // Global volume *** 
+                // Global volume ***
                 case 0x10:
                 xm_globalvol = tptr->effectdata;
                 if (xm_globalvol > 64) xm_globalvol = 64;
                 break;
 
-                // Global volume slide 
+                // Global volume slide
                 case 0x11:
                 if (tptr->effectdata)
                 {
@@ -1225,7 +1225,7 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Keyoff 
+                // Keyoff
                 case 0x14:
                 tptr->keyon = 0;
                 if (!(tptr->ip->volenvflags & ENV_ON))
@@ -1235,13 +1235,13 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Set envpos 
+                // Set envpos
                 case 0x15:
                 tptr->volenvpos = tptr->effectdata;
                 tptr->panenvpos = tptr->effectdata;
                 break;
 
-                // Panning slide 
+                // Panning slide
                 case 0x19:
                 if (tptr->effectdata)
                 {
@@ -1250,7 +1250,7 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Multi retrig 
+                // Multi retrig
                 case 0x1b:
                 if (tptr->nybble1) tptr->retrigvolchange = tptr->nybble1;
                 if (tptr->nybble2) tptr->retriginterval = tptr->nybble2;
@@ -1258,7 +1258,7 @@ static void xmplayer(void)
                 {
                     startnewnote(tptr, chptr);
                     tptr->multiretrigcount = 0;
-                    // Now modify volume 
+                    // Now modify volume
                     if (!retrigmultable[tptr->retrigvolchange])
                     {
                         tptr->notevol += retrigaddtable[tptr->retrigvolchange];
@@ -1276,7 +1276,7 @@ static void xmplayer(void)
                 tptr->multiretrigcount++;
                 break;
 
-                // Tremor 
+                // Tremor
                 case 0x1d:
                 if (tptr->effectdata)
                 {
@@ -1285,7 +1285,7 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Extra fine portamento 
+                // Extra fine portamento
                 case 0x21:
                 switch (tptr->nybble1)
                 {
@@ -1323,21 +1323,21 @@ static void xmplayer(void)
                 case 0x0:
                 break;
 
-                // Volslide down 
+                // Volslide down
                 case 0x6:
                 tptr->notevol -= tptr->voleffect & 0xf;
                 if (tptr->notevol < 0) tptr->notevol = 0;
                 tptr->vol = tptr->notevol;
                 break;
 
-                // Volslide up 
+                // Volslide up
                 case 0x7:
                 tptr->notevol += tptr->voleffect & 0xf;
                 if (tptr->notevol > 64) tptr->notevol = 64;
                 tptr->vol = tptr->notevol;
                 break;
 
-                // Vibrato 
+                // Vibrato
                 case 0xb:
                 tptr->vibratophase += tptr->vibratospeed * 4;
                 tptr->period = tptr->baseperiod + ((vibratotable[tptr->vibratotype & 3][tptr->vibratophase] * tptr->vibratodepth) >> 3);
@@ -1345,7 +1345,7 @@ static void xmplayer(void)
                 if (tptr->period > lowperiod) tptr->period = lowperiod;
                 break;
 
-                // Panslide left 
+                // Panslide left
                 case 0xd:
                 {
                     int new = tptr->notepanning;
@@ -1355,7 +1355,7 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Panslide right 
+                // Panslide right
                 case 0xe:
                 {
                     int new = tptr->notepanning;
@@ -1365,7 +1365,7 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Toneportamento 
+                // Toneportamento
                 case 0xf:
                 if (tptr->tp)
                 {
@@ -1425,7 +1425,7 @@ static void xmplayer(void)
 
             switch (tptr->effect)
             {
-                // Arpeggio 
+                // Arpeggio
                 case 0x0:
                 if (tptr->effectdata)
                 {
@@ -1451,21 +1451,21 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Portamento up 
+                // Portamento up
                 case 0x1:
                 tptr->baseperiod -= tptr->portaspeedup * 4;
                 if (tptr->baseperiod < highperiod) tptr->baseperiod = highperiod;
                 tptr->period = tptr->baseperiod;
                 break;
 
-                // Portamento down 
+                // Portamento down
                 case 0x2:
                 tptr->baseperiod += tptr->portaspeeddown * 4;
                 if (tptr->baseperiod > lowperiod) tptr->baseperiod = lowperiod;
                 tptr->period = tptr->baseperiod;
                 break;
 
-                // Toneportamento 
+                // Toneportamento
                 case 0x3:
                 if (tptr->tp)
                 {
@@ -1519,7 +1519,7 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Vibrato 
+                // Vibrato
                 case 0x4:
                 tptr->vibratophase += tptr->vibratospeed * 4;
                 tptr->period = tptr->baseperiod + ((vibratotable[tptr->vibratotype & 3][tptr->vibratophase] * tptr->vibratodepth) >> 3);
@@ -1527,7 +1527,7 @@ static void xmplayer(void)
                 if (tptr->period > lowperiod) tptr->period = lowperiod;
                 break;
 
-                // Toneportamento + volslide 
+                // Toneportamento + volslide
                 case 0x5:
                 if (tptr->tp)
                 {
@@ -1592,7 +1592,7 @@ static void xmplayer(void)
                 tptr->vol = tptr->notevol;
                 break;
 
-                // Vibrato + volslide 
+                // Vibrato + volslide
                 case 0x6:
                 tptr->vibratophase += tptr->vibratospeed * 4;
                 tptr->period = tptr->baseperiod + ((vibratotable[tptr->vibratotype & 3][tptr->vibratophase] * tptr->vibratodepth) >> 3);
@@ -1611,7 +1611,7 @@ static void xmplayer(void)
                 tptr->vol = tptr->notevol;
                 break;
 
-                // Tremolo 
+                // Tremolo
                 case 0x7:
                 tptr->tremolophase += tptr->tremolospeed * 4;
                 tptr->vol = tptr->notevol + ((vibratotable[tptr->tremolotype & 3][tptr->tremolophase] * tptr->tremolodepth) >> 4);
@@ -1619,7 +1619,7 @@ static void xmplayer(void)
                 if (tptr->vol > 64) tptr->vol = 64;
                 break;
 
-                // Volume Slide 
+                // Volume Slide
                 case 0xa:
                 if (tptr->volspeedup)
                 {
@@ -1634,12 +1634,12 @@ static void xmplayer(void)
                 tptr->vol = tptr->notevol;
                 break;
 
-                // Extended command 
+                // Extended command
                 case 0xe:
                 extendedcommand(tptr, chptr);
                 break;
 
-                // Global volume slide 
+                // Global volume slide
                 case 0x11:
                 if (xm_globalvolspeedup)
                 {
@@ -1654,7 +1654,7 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Panning slide 
+                // Panning slide
                 case 0x19:
                 {
                     int new = tptr->notepanning;
@@ -1667,13 +1667,13 @@ static void xmplayer(void)
                 }
                 break;
 
-                // Multi retrig 
+                // Multi retrig
                 case 0x1b:
                 if (tptr->multiretrigcount >= tptr->retriginterval)
                 {
                     startnewnote(tptr, chptr);
                     tptr->multiretrigcount = 0;
-                    // Now modify volume 
+                    // Now modify volume
                     if (!retrigmultable[tptr->retrigvolchange])
                     {
                         tptr->notevol += retrigaddtable[tptr->retrigvolchange];
@@ -1691,7 +1691,7 @@ static void xmplayer(void)
                 tptr->multiretrigcount++;
                 break;
 
-                // Tremor 
+                // Tremor
                 case 0x1d:
                 if (!tptr->tremorcount)
                 {
@@ -1908,7 +1908,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
 {
     switch(tptr->nybble1)
     {
-        // Fine porta up 
+        // Fine porta up
         case 0x1:
         if (!xm_tickcount)
         {
@@ -1918,7 +1918,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Fine porta down 
+        // Fine porta down
         case 0x2:
         if (!xm_tickcount)
         {
@@ -1928,12 +1928,12 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Set glissando 
+        // Set glissando
         case 0x3:
         if (!xm_tickcount) tptr->glissando = tptr->nybble2;
         break;
 
-        // Set vibrato waveform 
+        // Set vibrato waveform
         case 0x4:
         if (!xm_tickcount)
         {
@@ -1942,7 +1942,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Set finetune 
+        // Set finetune
         case 0x5:
         if ((!xm_tickcount) && (tptr->newnote))
         {
@@ -1953,7 +1953,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Patternloop 
+        // Patternloop
         case 0x6:
         if (!xm_tickcount)
         {
@@ -1974,7 +1974,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Set tremolo waveform 
+        // Set tremolo waveform
         case 0x7:
         if (!xm_tickcount)
         {
@@ -1983,14 +1983,14 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Retrig 
+        // Retrig
         case 0x9:
         if (tptr->nybble2)
         {
             if (tptr->retrigcount >= tptr->nybble2)
             {
                 tptr->retrigcount = 0;
-                // Don't retrig on tick 0 
+                // Don't retrig on tick 0
                 if (xm_tickcount)
                 {
                     startnewnote(tptr, chptr);
@@ -2016,9 +2016,9 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         tptr->retrigcount++;
         break;
 
-        // Notedelay 
+        // Notedelay
         case 0xd:
-        // Don't start on tick 0 
+        // Don't start on tick 0
         if (!xm_tickcount) break;
         if (xm_tickcount == tptr->nybble2)
         {
@@ -2045,12 +2045,12 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Cut note 
+        // Cut note
         case 0xc:
         if (xm_tickcount == tptr->nybble2) tptr->notevol = 0;
         break;
 
-        // Fine volslide up 
+        // Fine volslide up
         case 0xa:
         if (!xm_tickcount)
         {
@@ -2060,7 +2060,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Fine volslide down 
+        // Fine volslide down
         case 0xb:
         if (!xm_tickcount)
         {
@@ -2070,7 +2070,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Patterndelay 
+        // Patterndelay
         case 0xe:
         if (!xm_tickcount)
         {

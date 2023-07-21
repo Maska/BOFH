@@ -271,7 +271,7 @@ WINDOW HANDLING & EVENTS
 
 int win_openwindow(char *appname, char *icon);
 
-        Calls SDL_Init(), so this is the first thing you should call in 
+        Calls SDL_Init(), so this is the first thing you should call in
         your program.
 
         win_fullscreen   - are graphics running in fullscreen mode
@@ -322,10 +322,10 @@ void win_setmousemode(int mode)
         fullscreen & windowed modes.
 
         MOUSE_ALWAYS_VISIBLE - mouse cursor is visible in both fullscreen &
-        windowed modes. 
+        windowed modes.
 
         MOUSE_FULLSCREEN_HIDDEN - mouse cursor is hidden in fullscreen mode
-        but visible in windowed mode. 
+        but visible in windowed mode.
 
         MOUSE_ALWAYS_HIDDEN - mouse cursor is hidden in both modes.
 
@@ -335,7 +335,7 @@ GRAPHICS
 
 int gfx_init(unsigned xsize, unsigned ysize, unsigned framerate, unsigned flags);
 
-        Initializes the 256 color graphics engine with the virtual screen 
+        Initializes the 256 color graphics engine with the virtual screen
         size and flags you specify. Framerate is obsolete as of V1.27
 
         Flags are:
@@ -360,7 +360,7 @@ int gfx_init(unsigned xsize, unsigned ysize, unsigned framerate, unsigned flags)
         windowed and fullscreen (this is taken care by the window procedure)
 
         In fullscreen mode there might not necessarily be a display mode that
-        is exactly the size of the virtual screen. In this case SDL 
+        is exactly the size of the virtual screen. In this case SDL
         displays a black border around the window.
 
 void gfx_uninit(void);
@@ -375,7 +375,7 @@ int gfx_reinit(void);
 
 void gfx_updatepage(void);
 
-        Updates the screen to match the contents of the virtual 
+        Updates the screen to match the contents of the virtual
         screen.
 
 void gfx_blitwindow(void);
@@ -393,7 +393,7 @@ int gfx_loadpalette(char *name);
         utility)
 
         All 256 colors can be used, but color 0 is hard-coded to black and
-        color 255 to white. 
+        color 255 to white.
 
 void gfx_calcpalette(int fade, int radd, int gadd, int badd);
 
@@ -521,8 +521,8 @@ extern unsigned char win_keytable[];
 
 extern unsigned char win_keystate[];
 
-        This is a copy of the state table, that kbd_checkkey(), 
-        kbd_getkey() etc. don't clear. Use this to check continuous 
+        This is a copy of the state table, that kbd_checkkey(),
+        kbd_getkey() etc. don't clear. Use this to check continuous
         pressing of keys.
 
 
@@ -603,14 +603,14 @@ void io_close(int handle);
 
 int io_opendatafile(char *name);
 
-        Opens a datafile. Data appended to an executable is no longer 
+        Opens a datafile. Data appended to an executable is no longer
         supported.
 
 int io_openlinkeddatafile(unsigned char *ptr)
 
         Opens a datafile from memory. Use DAT2INC to create an array out
         of your datafile, include the output in your program and then call
-        
+
         io_openlinkeddatafile(datafile);
 
 void io_setfilemode(int usedf);
@@ -810,10 +810,10 @@ parameters.
 5. RECOMPILING BME WITH ANOTHER COMPILER
 ----------------------------------------
 
-To do this, you must generate the makefile yourself. BME shouldn't 
+To do this, you must generate the makefile yourself. BME shouldn't
 depend on any evil things specific to GCC for example. Also, as of V1.27
 it's 100% C code - no ASM modules at all.
- 
+
 
 6. VERSION HISTORY
 ------------------
@@ -963,10 +963,10 @@ V1.28   - Uses the BSD license
 
 V1.29   - Changes by Kalle Niemitalo integrated
 
-V1.3    - endian.h renamed to fileio.h for possible clashes with system 
+V1.3    - endian.h renamed to fileio.h for possible clashes with system
           include files
         - ifndef guards added to include files
 
 V1.31   - Fixed handling of raw keycodes over 511 (ignored for now for the key
-          state, still readable from kbd_getvirtualkey)   
+          state, still readable from kbd_getvirtualkey)
 

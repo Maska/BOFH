@@ -2,6 +2,6 @@ all:
 	$(MAKE) -C bme/src
 	$(MAKE) -C src
 
-clean: 
+clean:
 	$(MAKE) clean -C bme/src
 	$(MAKE) clean -C src

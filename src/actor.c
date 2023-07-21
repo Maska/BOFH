@@ -3084,7 +3084,7 @@ int domove(ACTOR *aptr)
                 if (impetusx < -maximpetus) impetusx = -maximpetus;
                 if (impetusy >  maximpetus) impetusy =  maximpetus;
                 if (impetusy < -maximpetus) impetusy = -maximpetus;
-                
+
                 aptr->speedx -= impetusx;
                 aptr->speedy -= impetusy;
                 cptr->speedx += impetusx;

@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     for (c = 0; c < length; c++)
     {
         if (c)
-        { 
+        {
             fprintf(out, ", ");
             if (!(c % 10)) fprintf(out, "\n");
         }

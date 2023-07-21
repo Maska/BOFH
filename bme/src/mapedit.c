@@ -251,7 +251,7 @@ void blockediting(void)
     blockx = mousex / gfx_blockxsize;
     blocky = mousey / gfx_blockysize;
     if (layer[cl].xdivisor)
-    {                
+    {
         blockx = (mousex + xpos/layer[cl].xdivisor) / gfx_blockxsize;
     }
     if (layer[cl].ydivisor)

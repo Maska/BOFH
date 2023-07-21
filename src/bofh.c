@@ -395,9 +395,9 @@ void titlescreen(void)
 			playfx(FXCHAN_ENEMYSHOOT, SMP_SHOTGUN, 22050, 64, 128);
 			menuselection = menu();
 			if (menuselection == 0) return;
-			if (menuselection == 1) phase = TITLE_HISCORE; 
+			if (menuselection == 1) phase = TITLE_HISCORE;
 			if (menuselection == 2) phase = TITLE_PRESENTS;
-			
+
 			phasetime = 0;
 			phasevar = 0;
 		}
@@ -665,7 +665,7 @@ int menu(void)
 					if (((checkhiscore() == 1) && (restartdialog()))
 							|| (restartdialog())) return 1;
 					}
-				}    
+				}
 			}
 			if (menuoption == 1) optionsmenu();
 			if (menuoption == 2) return 1;
@@ -705,7 +705,7 @@ int restartdialog(void)
 {
 	kbd_getascii();
 	getgamespeed();
-	updatemouse(); 
+	updatemouse();
 	for (;;)
 	{
           	getgamespeed();
@@ -714,7 +714,7 @@ int restartdialog(void)
 
 		checkglobalkeys();
 		if ((key == KEY_N) || (key == KEY_ESC))  return 1;
-	       
+
 		if (key != 0) return 0;
 
                 fireeffect();
@@ -752,7 +752,7 @@ int selectdifficulty(void)
         	                        nummissions++;
 				        if (!strcmp(buf,"original"))
 				           missionindex = nummissions - 1;
-				   
+
 	                                if (nummissions >= MAXMISSIONS) break;
                                 }
 	                }
@@ -952,7 +952,7 @@ int optionsmenu(void)
 			}
 		}
 		txt_print(190, 10, SPR_SMALLFONTS, "MOUSE SENSITIVITY:");
-                sprintf(textbuf, "%d", -(mousesens - 100)); 
+                sprintf(textbuf, "%d", -(mousesens - 100));
 		txt_print(230, 20, SPR_SMALLFONTS, textbuf);
 		txt_print(145, 170, SPR_SMALLFONTS, "USE UP & DOWN TO NAVIGATE");
 		txt_print(145, 180, SPR_SMALLFONTS, "LEFT & RIGHT TO CHANGE MOUSE SENS");
@@ -983,7 +983,7 @@ int buttondialog(void)
 {
 	kbd_getascii();
 	getgamespeed();
-	updatemouse(); 
+	updatemouse();
 	for (;;)
 	{
           	getgamespeed();
@@ -997,7 +997,7 @@ int buttondialog(void)
  		txt_printcenter(80, SPR_FONTS, "PRESS BUTTON TO BIND, ESC TO CANCEL");
 		gfx_updatepage();
 	}
-} 
+}
 
 void game(char *missionname)
 {

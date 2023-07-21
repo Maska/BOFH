@@ -582,39 +582,39 @@ static void modplayer(void)
                 case 0x0:
                 break;
 
-                // Set portamento speed up 
+                // Set portamento speed up
                 case 0x1:
                 if (tptr->effectdata) tptr->portaspeedup = tptr->effectdata;
                 break;
 
-                // Set portamento speed down 
+                // Set portamento speed down
                 case 0x2:
                 if (tptr->effectdata) tptr->portaspeeddown = tptr->effectdata;
                 break;
 
-                // Set TP. speed 
+                // Set TP. speed
                 case 0x3:
                 if (tptr->effectdata) tptr->tpspeed = tptr->effectdata;
                 break;
 
-                // Set vibrato 
+                // Set vibrato
                 case 0x4:
                 if (tptr->nybble1) tptr->vibratospeed = tptr->nybble1;
                 if (tptr->nybble2) tptr->vibratodepth = tptr->nybble2;
                 break;
 
-                // Set tremolo 
+                // Set tremolo
                 case 0x7:
                 if (tptr->nybble1) tptr->tremolospeed = tptr->nybble1;
                 if (tptr->nybble2) tptr->tremolodepth = tptr->nybble2;
                 break;
 
-                // Set Panning 
+                // Set Panning
                 case 0x8:
                 chptr->panning = tptr->effectdata;
                 break;
 
-                // Volume slide speed set 
+                // Volume slide speed set
                 case 0x5:
                 case 0x6:
                 case 0xa:
@@ -625,13 +625,13 @@ static void modplayer(void)
                 }
                 break;
 
-                // Pos. jump 
+                // Pos. jump
                 case 0xb:
                 mt_line = 63;
                 mt_pos = tptr->effectdata - 1;
                 break;
 
-                // Set volume 
+                // Set volume
                 case 0xc:
                 chptr->vol = tptr->effectdata;
                 if (chptr->vol < 0) chptr->vol = 0;
@@ -639,7 +639,7 @@ static void modplayer(void)
                 tptr->vol = chptr->vol;
                 break;
 
-                // Pattern break 
+                // Pattern break
                 case 0xd:
                 if (!mt_patternbreak)
                 {
@@ -649,12 +649,12 @@ static void modplayer(void)
                 }
                 break;
 
-                // Extended command 
+                // Extended command
                 case 0xe:
                 extendedcommand(tptr, chptr);
                 break;
 
-                // Set tempo 
+                // Set tempo
                 case 0xf:
                 if (!tptr->effectdata)
                 {
@@ -682,7 +682,7 @@ static void modplayer(void)
         {
             switch (tptr->effect)
             {
-                // Arpeggio 
+                // Arpeggio
                 case 0x0:
                 {
                     if (tptr->effectdata)
@@ -712,21 +712,21 @@ static void modplayer(void)
                 }
                 break;
 
-                // Portamento up 
+                // Portamento up
                 case 0x1:
                 tptr->baseperiod -= tptr->portaspeedup;
                 if (tptr->baseperiod < 27) tptr->baseperiod = 27;
                 tptr->period = tptr->baseperiod;
                 break;
 
-                // Portamento down 
+                // Portamento down
                 case 0x2:
                 tptr->baseperiod += tptr->portaspeeddown;
                 if (tptr->baseperiod > 7256) tptr->baseperiod = 7256;
                 tptr->period = tptr->baseperiod;
                 break;
 
-                // Toneportamento 
+                // Toneportamento
                 case 0x3:
                 if (tptr->tp)
                 {
@@ -770,7 +770,7 @@ static void modplayer(void)
                 }
                 break;
 
-                // Vibrato 
+                // Vibrato
                 case 0x4:
                 tptr->vibratophase += tptr->vibratospeed * 4;
                 tptr->period = tptr->baseperiod + ((vibratotable[tptr->vibratotype & 3][tptr->vibratophase] * tptr->vibratodepth) >> 5);
@@ -778,7 +778,7 @@ static void modplayer(void)
                 if (tptr->period > 7256) tptr->period = 7256;
                 break;
 
-                // Toneportamento + volslide 
+                // Toneportamento + volslide
                 case 0x5:
                 if (tptr->tp)
                 {
@@ -833,7 +833,7 @@ static void modplayer(void)
                 tptr->vol = chptr->vol;
                 break;
 
-                // Vibrato + volslide 
+                // Vibrato + volslide
                 case 0x6:
                 tptr->vibratophase += tptr->vibratospeed * 4;
                 tptr->period = tptr->baseperiod + ((vibratotable[tptr->vibratotype & 3][tptr->vibratophase] * tptr->vibratodepth) >> 5);
@@ -852,7 +852,7 @@ static void modplayer(void)
                 tptr->vol = chptr->vol;
                 break;
 
-                // Tremolo 
+                // Tremolo
                 case 0x7:
                 tptr->tremolophase += tptr->tremolospeed * 4;
                 chptr->vol = tptr->vol + ((vibratotable[tptr->tremolotype & 3][tptr->tremolophase] * tptr->tremolodepth) >> 4);
@@ -860,7 +860,7 @@ static void modplayer(void)
                 if (chptr->vol > 64) chptr->vol = 64;
                 break;
 
-                // Volume Slide 
+                // Volume Slide
                 case 0xa:
                 if (tptr->volspeedup)
                 {
@@ -875,7 +875,7 @@ static void modplayer(void)
                 tptr->vol = chptr->vol;
                 break;
 
-                // Extended command 
+                // Extended command
                 case 0xe:
                 extendedcommand(tptr, chptr);
                 break;
@@ -976,7 +976,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
 {
     switch(tptr->nybble1)
     {
-        // Fine porta up 
+        // Fine porta up
         case 0x1:
         if (!mt_tickcount)
         {
@@ -986,7 +986,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Fine porta down 
+        // Fine porta down
         case 0x2:
         if (!mt_tickcount)
         {
@@ -996,12 +996,12 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Set glissando 
+        // Set glissando
         case 0x3:
         if (!mt_tickcount) tptr->glissando = tptr->nybble2;
         break;
 
-        // Set vibrato waveform 
+        // Set vibrato waveform
         case 0x4:
         if (!mt_tickcount)
         {
@@ -1010,7 +1010,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Set finetune 
+        // Set finetune
         case 0x5:
         if ((!mt_tickcount) && (tptr->newnote))
         {
@@ -1020,7 +1020,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Patternloop 
+        // Patternloop
         case 0x6:
         if (!mt_tickcount)
         {
@@ -1041,7 +1041,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Set tremolo waveform 
+        // Set tremolo waveform
         case 0x7:
         if (!mt_tickcount)
         {
@@ -1050,14 +1050,14 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Set panning (Undocumented) 
+        // Set panning (Undocumented)
         case 0x8:
         {
           chptr->panning = (tptr->nybble2 << 4) | tptr->nybble2;
         }
         break;
 
-        // Retrig 
+        // Retrig
         case 0x9:
         if (tptr->nybble2)
         {
@@ -1074,9 +1074,9 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         tptr->retrigcount++;
         break;
 
-        // Notedelay 
+        // Notedelay
         case 0xd:
-        // Don't start on tick 0 or if there's no note 
+        // Don't start on tick 0 or if there's no note
         if ((!mt_tickcount) || (!tptr->newnote)) break;
         if (mt_tickcount == tptr->nybble2)
         {
@@ -1089,7 +1089,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Cut note 
+        // Cut note
         case 0xc:
         if (mt_tickcount == tptr->nybble2)
         {
@@ -1098,7 +1098,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Fine volslide up 
+        // Fine volslide up
         case 0xa:
         if (!mt_tickcount)
         {
@@ -1109,7 +1109,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Fine volslide down 
+        // Fine volslide down
         case 0xb:
         if (!mt_tickcount)
         {
@@ -1120,7 +1120,7 @@ static void extendedcommand(TRACK *tptr, CHANNEL *chptr)
         }
         break;
 
-        // Patterndelay 
+        // Patterndelay
         case 0xe:
         if (!mt_tickcount)
         {

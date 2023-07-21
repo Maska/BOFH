@@ -34,17 +34,17 @@ typedef struct
     Uint32 offset;
 } BLOCKHEADER;
 
-// Modes 
+// Modes
 #define NORMAL 1
 #define PALETTE 2
 #define BLOCK 3
 #define SPRITE 4
 
-// Block types 
+// Block types
 #define BLOCK_NORMAL 0
 #define BLOCK_SOLID 1
 
-// Some headers for dealing with IFF files 
+// Some headers for dealing with IFF files
 #define FORM 0x464f524d
 #define ILBM 0x494c424d
 #define PBM 0x50424d20
@@ -443,7 +443,7 @@ int convert_block(int x, int y, int xsize, int ysize)
             if (sc.data[x+xc + (y+yc)*sc.sizex] == tcolor) t++;
         }
     }
-    if (!t) // Solid block 
+    if (!t) // Solid block
     {
         for (yc = 0; yc < ysize; yc++)
         {
@@ -634,10 +634,10 @@ Uint32 read_header(FILE *fd)
 {
     Uint32 type;
 
-    // Go to the beginning 
+    // Go to the beginning
     fseek(fd, 0, SEEK_SET);
 
-    // Is it a FORM-type IFF file? 
+    // Is it a FORM-type IFF file?
     type = freadhe32(fd);
     if (type != FORM) return 0;
 
@@ -651,16 +651,16 @@ Uint32 find_chunk(FILE *fd, Uint32 type)
 {
     Uint32 length, thischunk, thislength, pos;
 
-    // Get file length so we know how much data to go thru 
+    // Get file length so we know how much data to go thru
     fseek(fd, 4, SEEK_SET);
     length = freadhe32(fd) + 8;
 
-    // Now go to the first chunk 
+    // Now go to the first chunk
     fseek(fd, 12, SEEK_SET);
 
     for (;;)
     {
-        // Read type & length, check for match 
+        // Read type & length, check for match
         thischunk = freadhe32(fd);
         thislength = freadhe32(fd);
         if (thischunk == type)
@@ -668,7 +668,7 @@ Uint32 find_chunk(FILE *fd, Uint32 type)
             return thislength;
         }
 
-        // No match, skip over this chunk (pad byte if odd size) 
+        // No match, skip over this chunk (pad byte if odd size)
         if (thislength & 1)
         {
             fseek(fd, thislength + 1, SEEK_CUR);
@@ -680,7 +680,7 @@ Uint32 find_chunk(FILE *fd, Uint32 type)
             pos = ftell(fd);
         }
 
-        // Quit if gone to the end 
+        // Quit if gone to the end
         if (pos >= length) break;
     }
     return 0;
@@ -691,12 +691,12 @@ int load_pic(char *name)
     FILE *fd = fopen(name, "rb");
     Uint32 type;
 
-    // Couldn't open 
+    // Couldn't open
     if (!fd) return 0;
 
     type = read_header(fd);
 
-    // Not an IFF file 
+    // Not an IFF file
     if (!type)
     {
         fclose(fd);
@@ -740,7 +740,7 @@ int load_pic(char *name)
                 }
 
                 // Now the BODY chunk
-                 
+
                 bodylength = find_chunk(fd, BODY);
 
                 if (bodylength)
@@ -775,7 +775,7 @@ int load_pic(char *name)
 
                         fread(ptr, bodylength, 1, fd);
 
-                        // Run-length encoding 
+                        // Run-length encoding
                         for (ycount = 0; ycount < sizey; ycount++)
                         {
                             int total = 0;
@@ -849,7 +849,7 @@ int load_pic(char *name)
                 }
 
                 // Now the BODY chunk
-                 
+
                 bodylength = find_chunk(fd, BODY);
 
                 if (bodylength)

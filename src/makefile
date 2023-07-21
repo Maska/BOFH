@@ -41,7 +41,7 @@ all: ../missions/original.blk ../missions/test.blk ../data/bofh.pal	\
 	$(BMECONV) -s -t255 -r254 -h253 $< $@
 
 clean:
-	rm -f ../bofh ../bofhedit *.o 
+	rm -f ../bofh ../bofhedit *.o
 	rm -f ../missions/original.blk ../missions/test.blk
 	rm -f ../data/*.pal ../data/*.raw ../data/*.spr
 .PHONY: clean

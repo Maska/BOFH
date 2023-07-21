@@ -17,7 +17,7 @@ static int compare_scores(const void *av,
 {
         const HISCORE_ENTRY *const a = av;
         const HISCORE_ENTRY *const b = bv;
-        
+
         if (a->score > b->score)
                 return -1;
         else if (a->score < b->score)
@@ -140,7 +140,7 @@ void savehiscore(void)
                       | S_IWUSR | S_IWGRP | S_IWOTH);
 #else
                       S_IREAD | S_IWRITE);
-#endif                      
+#endif
         if (fd != -1)
         {
 #ifndef __WIN32__

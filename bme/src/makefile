@@ -56,7 +56,7 @@ mapedit.dat: mapedit.seq $(PREFIX)datafile fonts.spr editor.spr
 %.spr: %.lbm $(PREFIX)bmeconv
 	$(PREFIX)bmeconv -s $< $@
 
-$(PREFIX)mapedit: mapedit.o fileio.o cfgfile.o mapdata.o $(PREFIX)libbme.a 
+$(PREFIX)mapedit: mapedit.o fileio.o cfgfile.o mapdata.o $(PREFIX)libbme.a
 	$(CC) -o $@ $^ $(LIBS)
 
 $(PREFIX)infedit: infedit.o fileio.o cfgfile.o mapdata.o $(PREFIX)libbme.a

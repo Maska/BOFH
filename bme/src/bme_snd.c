@@ -90,7 +90,7 @@ int snd_init(unsigned mixrate, unsigned mixmode, unsigned bufferlength, unsigned
             if (!desired.samples) break;
             bits++;
         }
-        desired.samples = 1 << bits;    
+        desired.samples = 1 << bits;
     }
 
     desired.callback = snd_mixer;

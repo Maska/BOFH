@@ -319,7 +319,7 @@ int gfx_loadblocks(char *name)
         gfx_blockheaders = NULL;
     }
     gfx_nblocks = 0;
-    
+
     size = io_lseek(handle, 0, SEEK_END);
     io_lseek(handle, 0, SEEK_SET);
 
@@ -346,7 +346,7 @@ int gfx_loadblocks(char *name)
     datastart = io_lseek(handle, 0, SEEK_CUR);
     gfx_blocks = malloc(size - datastart);
     if (!gfx_blocks)
-    { 
+    {
         free(gfx_blockheaders);
         gfx_blockheaders = NULL;
         bme_error = BME_OUT_OF_MEMORY;
@@ -411,7 +411,7 @@ int gfx_loadsprites(int num, char *name)
 
     if (!gfx_spriteheaders[num])
     {
-        bme_error = BME_OUT_OF_MEMORY;    
+        bme_error = BME_OUT_OF_MEMORY;
         io_close(handle);
         return BME_ERROR;
     }
@@ -431,7 +431,7 @@ int gfx_loadsprites(int num, char *name)
     gfx_spritedata[num] = malloc(size - datastart);
     if (!gfx_spritedata[num])
     {
-        bme_error = BME_OUT_OF_MEMORY;    
+        bme_error = BME_OUT_OF_MEMORY;
         io_close(handle);
         return BME_ERROR;
     }
@@ -757,7 +757,7 @@ void gfx_drawspritec(int x, int y, unsigned num, int color)
     Uint8 *dptr;
     int cx;
 
-    if ((sprf >= gfx_maxspritefiles) || (!gfx_spriteheaders[sprf]) || 
+    if ((sprf >= gfx_maxspritefiles) || (!gfx_spriteheaders[sprf]) ||
         (spr >= gfx_spriteamount[sprf]))
     {
         spr_xsize = 0;
@@ -860,7 +860,7 @@ void gfx_drawspritex(int x, int y, unsigned num, Uint8  *xlattable)
     Uint8 *dptr;
     int cx;
 
-    if ((sprf >= gfx_maxspritefiles) || (!gfx_spriteheaders[sprf]) || 
+    if ((sprf >= gfx_maxspritefiles) || (!gfx_spriteheaders[sprf]) ||
         (spr >= gfx_spriteamount[sprf]))
     {
         spr_xsize = 0;

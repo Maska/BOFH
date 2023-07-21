@@ -1,5 +1,5 @@
 //
-// BLOCKINFO EDITOR  
+// BLOCKINFO EDITOR
 //
 
 #ifndef __WIN32__
