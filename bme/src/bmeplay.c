@@ -93,7 +93,7 @@ int main(int argc, char **argv)
         break;
     }
 
-	getchar();
+        getchar();
 
     EXIT:
     return 0;

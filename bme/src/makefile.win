@@ -8,8 +8,8 @@ PREFIX = ../win32/
 SUFFIX = .exe
 LIBS = -lmingw32 -lSDLmain -lSDL
 
-objs = bme.o bme_gfx.o bme_io.o bme_win.o bme_kbd.o bme_mou.o		\
-bme_joy.o bme_map.o bme_txt.o bme_snd.o bme_mod.o bme_xm.o bme_s3m.o	\
+objs = bme.o bme_gfx.o bme_io.o bme_win.o bme_kbd.o bme_mou.o         \
+bme_joy.o bme_map.o bme_txt.o bme_snd.o bme_mod.o bme_xm.o bme_s3m.o  \
 bme_raw.o bme_wav.o bme_smp.o bme_tbl.o
 picobjs = $(objs:.o=.pic.o)
 

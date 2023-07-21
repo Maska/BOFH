@@ -166,24 +166,24 @@
 
 typedef struct
 {
-	Sint8 *start;
-	Sint8 *repeat;
-	Sint8 *end;
-	unsigned char voicemode;
+  Sint8 *start;
+  Sint8 *repeat;
+  Sint8 *end;
+  unsigned char voicemode;
 } SAMPLE;
 
 typedef struct
 {
-	volatile Sint8 *pos;
-	Sint8 *repeat;
-	Sint8 *end;
-	SAMPLE *smp;
-	unsigned freq;
-	volatile unsigned fractpos;
-	int vol;
-	int mastervol;
-	unsigned panning;
-	volatile unsigned voicemode;
+  volatile Sint8 *pos;
+  Sint8 *repeat;
+  Sint8 *end;
+  SAMPLE *smp;
+  unsigned freq;
+  volatile unsigned fractpos;
+  int vol;
+  int mastervol;
+  unsigned panning;
+  volatile unsigned voicemode;
 } CHANNEL;
 
 typedef struct

@@ -3,13 +3,13 @@ CFLAGS = -g -Wall `sdl-config --cflags`
 BMECONV = ../bme/bmeconv
 LIBS = -L../bme -lbme -lm `sdl-config --libs`
 
-all: ../missions/original.blk ../missions/test.blk ../data/bofh.pal	\
-../data/splash.pal ../data/splash.raw ../data/title.spr			\
-../data/player.spr ../data/weapon.spr ../data/machine.spr		\
-../data/fistman.spr ../data/gunman.spr ../data/shotgman.spr		\
-../data/uziman.spr ../data/tech.spr ../data/closet.spr			\
-../data/leader.spr ../data/sadist.spr ../data/bigfnt.spr		\
-../data/smallfnt.spr ../data/blackfnt.spr ../data/editor.spr ../bofh	\
+all: ../missions/original.blk ../missions/test.blk ../data/bofh.pal   \
+../data/splash.pal ../data/splash.raw ../data/title.spr               \
+../data/player.spr ../data/weapon.spr ../data/machine.spr             \
+../data/fistman.spr ../data/gunman.spr ../data/shotgman.spr           \
+../data/uziman.spr ../data/tech.spr ../data/closet.spr                \
+../data/leader.spr ../data/sadist.spr ../data/bigfnt.spr              \
+../data/smallfnt.spr ../data/blackfnt.spr ../data/editor.spr ../bofh  \
 ../bofhedit
 .PHONY: all
 

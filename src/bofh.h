@@ -306,53 +306,53 @@
 
 typedef struct
 {
-	int samplenum;
-	int repeat;
+        int samplenum;
+        int repeat;
 } SAMPLELOOPPOINT;
 
 
 typedef struct
 {
-	char name[NAMELENGTH];
-	int score;
+        char name[NAMELENGTH];
+        int score;
 } HISCORE_ENTRY;
 
 typedef struct
 {
-	int xb;
-	int yb;
+        int xb;
+        int yb;
         int anim;
         char name[16];
-	int equipment[MAX_EQUIP];
+        int equipment[MAX_EQUIP];
 } CLOSET;
 
 typedef struct
 {
-	int location;
-	int wireorder[4];
-	int wiresleft;
-	int instructions;
+        int location;
+        int wireorder[4];
+        int wiresleft;
+        int instructions;
 } BOMB;
 
 typedef struct
 {
-	int x;
-	int y;
-	int angle;
-	int angularspeed;
-	int speedx;
-	int speedy;
-	int health;
-	int frame;
-	int type;
-	int attack;
-	int attackdelay;
-	void *origin;
-	int enemymode;
-	int enemycontrol;
-	int enemycounter;
+        int x;
+        int y;
+        int angle;
+        int angularspeed;
+        int speedx;
+        int speedy;
+        int health;
+        int frame;
+        int type;
+        int attack;
+        int attackdelay;
+        void *origin;
+        int enemymode;
+        int enemycontrol;
+        int enemycounter;
         int enemybored;
-	int special; /* Number of grenades for enemies */
+        int special; /* Number of grenades for enemies */
         int areanum; /* For collision detection */
 } ACTOR;
 
@@ -370,20 +370,20 @@ typedef struct
 
 typedef struct
 {
-	int xb;
-	int yb;
+        int xb;
+        int yb;
 } LIFTFLOOR;
 
 typedef struct
 {
-	int floor;
-	int destfloor;
-	int floors;
-	int speed;
-	int startdelay;
-	int firstfloor;
-	int angle;
-	LIFTFLOOR liftfloor[MAX_FLOOR];
+        int floor;
+        int destfloor;
+        int floors;
+        int speed;
+        int startdelay;
+        int firstfloor;
+        int angle;
+        LIFTFLOOR liftfloor[MAX_FLOOR];
 } LIFT;
 
 #define BND_MIN_HITTIME 10
