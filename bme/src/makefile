@@ -3,7 +3,7 @@
 #
 
 CC = cc
-CFLAGS = -O3 -Wall
+CFLAGS = -O3 -Wall -Wno-unused-result
 LIBS = `sdl-config --libs`
 PREFIX = ../
 
