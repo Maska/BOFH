@@ -1700,7 +1700,6 @@ int checkhiscore(void)
 {
         int place = -1;
         int ascii;
-        int key;
         int c;
 
         loadhiscore();
@@ -1734,18 +1733,19 @@ int checkhiscore(void)
 		getgamespeed();
                 updatemouse();
 
-                key = kbd_getkey();
                 ascii = kbd_getascii();
                 ascii = toupper(ascii);
                 checkglobalkeys();
 
                 if (ascii)
                 {
+			/* Escape or carriage return. */
 			if ((ascii == 27) || (ascii == 13))
 			{
 				playfx(FXCHAN_ENEMYSHOOT, SMP_SHOTGUN, 22050, 64, 128);
 				break;
 			}
+			/* Backspace. */
 	                if (ascii == 8)
 	                {
 	                	int pos = strlen(hiscore[place].name);
