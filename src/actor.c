@@ -1594,7 +1594,7 @@ void breakglass(ACTOR *aptr, int x, int y)
 {
         int d;
         int blknum = map_getblocknum(1, x/DEC, y/DEC);
-        short *mapptr;
+        short unsigned *mapptr;
         int xb = x >> 12;
         int yb = y >> 12;
         if (blknum < 421)
@@ -1613,7 +1613,7 @@ void breakglass(ACTOR *aptr, int x, int y)
 void structuredamage(int x, int y)
 {
         int blknum;
-        short *mapptr;
+        short unsigned *mapptr;
         int xb = x >> 12;
         int yb = y >> 12;
         blknum = map_getblocknum(0, x/DEC, y/DEC);
