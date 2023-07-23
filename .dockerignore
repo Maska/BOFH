@@ -1,0 +1,2 @@
+# Use no context but bind mount instead, so ignore everything.
+**/*
