@@ -512,9 +512,11 @@ void titlescreen(void)
 
 			case TITLE_HISCORE:
 			txt_printcenter(200-phasevar*2, SPR_FONTS, "LEGENDARY BOFHS");
+			char name[NAMELENGTH]; /*  */
                         for (c = 0; c < 10; c++)
                         {
-                        	sprintf(textbuf, "%02d. %-19s %06d", c+1, hiscore[c].name, hiscore[c].score);
+                                memcpy(name, hiscore[c].name, NAMELENGTH);
+                                sprintf(textbuf, "%02d. %-19s %06d", c+1, name, hiscore[c].score);
 				txt_printcenter(220-phasevar*2+c*17, SPR_FONTS, textbuf);
                         }
                         break;
