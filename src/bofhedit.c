@@ -2732,7 +2732,7 @@ void loadmission(void)
         /* Read in victory condition & texts */
         victorybits = mfreadint();
 
-        memset(briefingtext, sizeof briefingtext, 0);
+        memset(briefingtext, 0, sizeof briefingtext);
 	textptr = briefingtext;
 	for (;;)
 	{
