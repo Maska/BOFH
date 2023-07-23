@@ -1,7 +1,6 @@
 #include "bofh.h"
 #include "sincos.h"
 #include "extern.h"
-#include "keybinds.h"
 
 char *colorstring[] = {"RED", "GREEN", "BLUE", "YELLOW"};
 

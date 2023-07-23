@@ -1,7 +1,6 @@
 #include "bofh.h"
 #include "sincos.h"
 #include "extern.h"
-#include "keybinds.h"
 
 static void ensure_bnd_sound (enum bnd_sound bnds);
 static int takes_weapon(unsigned type, unsigned amnt);
@@ -28,6 +27,7 @@ int strafekey = KEY_ALT;
 int walkkey = KEY_LEFTSHIFT;
 int attackkey = KEY_SPACE;
 int nextweap = KEY_ENTER;
+int prevweap = KEY_RIGHTSHIFT;
 int pausekey = KEY_P;
 int linekey = KEY_S;
 int musickey = KEY_M;
@@ -38,6 +38,7 @@ int bluekey = KEY_B;
 int yellowkey = KEY_Y;
 unsigned mouseattack = MOUSEB_LEFT;
 unsigned mousenextweap = MOUSEB_RIGHT;
+unsigned mouseprevweap = MOUSEB_MIDDLE;
 int mousesens = 64;
 
 void makecollareas(void)

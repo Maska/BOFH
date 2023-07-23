@@ -10,7 +10,6 @@
 #include "bofh.h"
 #include "extern.h"
 #include "sincos.h"
-#include "keybinds.h"
 
 ACTOR actor[MAX_ACTOR];
 BOMB bomb[MAX_BOMB];
