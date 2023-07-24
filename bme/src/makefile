@@ -6,6 +6,7 @@ CC = cc
 CFLAGS = -O3 -Wall -Wno-unused-result
 LIBS = `sdl-config --libs`
 PREFIX = ../
+BMECONV = $(PREFIX)../release/tools/bmeconv
 
 all_cflags = $(CFLAGS) `sdl-config --cflags`
 objs = bme.o bme_gfx.o bme_io.o bme_win.o bme_kbd.o bme_mou.o         \
@@ -14,7 +15,14 @@ bme_raw.o bme_wav.o bme_smp.o bme_tbl.o
 picobjs = $(objs:.o=.pic.o)
 so = $(PREFIX)libbme.so.0
 
-all: $(PREFIX)libbme.a $(so) $(PREFIX)bmeconv $(PREFIX)datafile $(PREFIX)dat2inc $(PREFIX)mapedit $(PREFIX)infedit $(PREFIX)bmeplay
+all: $(PREFIX)libbme.a                 \
+     $(so)                             \
+     $(BMECONV)                        \
+     $(PREFIX)datafile                 \
+     $(PREFIX)dat2inc                  \
+     $(PREFIX)mapedit                  \
+     $(PREFIX)infedit                  \
+     $(PREFIX)bmeplay
 .PHONY: all
 
 clean: linkclean
@@ -27,7 +35,7 @@ clean: linkclean
 linkclean:
 	rm -f $(PREFIX)libbme.a
 	rm -f $(so)
-	rm -f $(PREFIX)bmeconv
+	rm -f $(BMECONV)
 	rm -f $(PREFIX)bmeplay
 	rm -f $(PREFIX)dat2inc
 	rm -f $(PREFIX)datafile
@@ -53,8 +61,8 @@ mapdata.c: mapedit.dat $(PREFIX)dat2inc
 mapedit.dat: mapedit.seq $(PREFIX)datafile fonts.spr editor.spr
 	$(PREFIX)datafile $@ $<
 
-%.spr: %.lbm $(PREFIX)bmeconv
-	$(PREFIX)bmeconv -s $< $@
+%.spr: %.lbm $(BMECONV)
+	$(BMECONV) -s $< $@
 
 $(PREFIX)mapedit: mapedit.o fileio.o cfgfile.o mapdata.o $(PREFIX)libbme.a
 	$(CC) -o $@ $^ $(LIBS)
@@ -68,7 +76,7 @@ $(PREFIX)bmeplay: bmeplay.o $(PREFIX)libbme.a
 $(PREFIX)datafile: datafile.o fileio.o
 	$(CC) -o $@ $^
 
-$(PREFIX)bmeconv: bmeconv.o fileio.o
+$(BMECONV): bmeconv.o fileio.o
 	$(CC) -o $@ $^
 
 $(PREFIX)dat2inc: dat2inc.o

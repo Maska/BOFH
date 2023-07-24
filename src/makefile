@@ -1,47 +1,51 @@
 CC = gcc -pthread
 CFLAGS = -g -O3 -Wall -Wno-unused-result `sdl-config --cflags`
-BMECONV = ../bme/bmeconv
 LIBS = -L../bme -lbme -lm `sdl-config --libs`
 
-all: ../missions/original.blk ../missions/test.blk ../data/bofh.pal   \
-../data/splash.pal ../data/splash.raw ../data/title.spr               \
-../data/player.spr ../data/weapon.spr ../data/machine.spr             \
-../data/fistman.spr ../data/gunman.spr ../data/shotgman.spr           \
-../data/uziman.spr ../data/tech.spr ../data/closet.spr                \
-../data/leader.spr ../data/sadist.spr ../data/bigfnt.spr              \
-../data/smallfnt.spr ../data/blackfnt.spr ../data/editor.spr ../bofh  \
-../bofhedit
+RELEASE_DIR = ../release/
+BMECONV = $(RELEASE_DIR)tools/bmeconv
+MISSION_DIR = $(RELEASE_DIR)missions/
+DATA_DIR = $(RELEASE_DIR)data/
+
+all: $(MISSION_DIR)original.blk $(MISSION_DIR)test.blk $(DATA_DIR)bofh.pal     \
+$(DATA_DIR)splash.pal $(DATA_DIR)splash.raw $(DATA_DIR)title.spr               \
+$(DATA_DIR)player.spr $(DATA_DIR)weapon.spr $(DATA_DIR)machine.spr             \
+$(DATA_DIR)fistman.spr $(DATA_DIR)gunman.spr $(DATA_DIR)shotgman.spr           \
+$(DATA_DIR)uziman.spr $(DATA_DIR)tech.spr $(DATA_DIR)closet.spr                \
+$(DATA_DIR)leader.spr $(DATA_DIR)sadist.spr $(DATA_DIR)bigfnt.spr              \
+$(DATA_DIR)smallfnt.spr $(DATA_DIR)blackfnt.spr $(DATA_DIR)editor.spr          \
+$(RELEASE_DIR)bofh $(RELEASE_DIR)bofhedit
 .PHONY: all
 
-../bofh: actor.o bofh.o bomb.o enemy.o hiscore.o init.o sincos.o
+$(RELEASE_DIR)bofh: actor.o bofh.o bomb.o enemy.o hiscore.o init.o sincos.o
 	$(CC) $^ $(LIBS) -o$@
 
-../bofhedit: bofhedit.o endian.o
+$(RELEASE_DIR)bofhedit: bofhedit.o endian.o
 	$(CC) $^ $(LIBS) -o$@
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) -o $@ $<
 
-../missions/original.blk: bofhblk.lbm
+$(MISSION_DIR)original.blk: bofhblk.lbm
 	$(BMECONV) -b -t255 -r254 -h253 $< $@
 
-../missions/test.blk: bofhblk.lbm
+$(MISSION_DIR)test.blk: bofhblk.lbm
 	$(BMECONV) -b -t255 -r254 -h253 $< $@
 
-../data/bofh.pal: bofhblk.lbm
+$(DATA_DIR)bofh.pal: bofhblk.lbm
 	$(BMECONV) -p $< $@
 
-../data/%.pal: %.lbm
+$(DATA_DIR)%.pal: %.lbm
 	$(BMECONV) -p $< $@
 
-../data/%.raw: %.lbm
+$(DATA_DIR)%.raw: %.lbm
 	$(BMECONV) -n $< $@
 
-../data/%.spr: %.lbm
+$(DATA_DIR)%.spr: %.lbm
 	$(BMECONV) -s -t255 -r254 -h253 $< $@
 
 clean:
-	rm -f ../bofh ../bofhedit *.o
-	rm -f ../missions/original.blk ../missions/test.blk
-	rm -f ../data/*.pal ../data/*.raw ../data/*.spr
+	rm -f $(RELEASE_DIR)bofh $(RELEASE_DIR)bofhedit *.o
+	rm -f $(MISSION_DIR)original.blk $(MISSION_DIR)test.blk
+	rm -f $(DATA_DIR)*.pal $(DATA_DIR)*.raw $(DATA_DIR)*.spr
 .PHONY: clean
