@@ -1,6 +1,6 @@
            -------------------------
                    B O F H :
-           Servers Under Siege V1.61
+           Servers Under Siege V1.7
            -------------------------
                 An action game
 
@@ -293,6 +293,13 @@ V1.6
 V1.61
 
 * arctan lookup table fixed
+
+
+V1.7
+
+* Bindable keys
+* New control sceme option
+* Crash fixes
 
 
 OFFICIAL "HOMEPAGE":
