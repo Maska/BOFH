@@ -240,7 +240,7 @@ int main(int argc, char **argv)
 
 int bofhmain(void)
 {
-        win_fullscreen = 1;
+        win_fullscreen = 0;
 
         loadhiscore();
         loadconfig();
