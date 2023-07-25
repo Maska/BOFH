@@ -963,14 +963,14 @@ int optionsmenu(void)
                         if (((c == keyselect) && (flash & 16)) || (c != keyselect))
                         {
                                 if (c < 19) txt_print(10, (10*c)+10, SPR_SMALLFONTS, keytext[c]);
-                                else txt_print(190, 10*(c-16), SPR_SMALLFONTS, keytext[c]);
+                                else txt_print(190, 10*(c-18), SPR_SMALLFONTS, keytext[c]);
                         }
                 }
-                txt_print(190, 10, SPR_SMALLFONTS, "MOUSE SENSITIVITY:");
+                txt_print(190, 150, SPR_SMALLFONTS, "MOUSE SENSITIVITY:");
                 sprintf(textbuf, "%d", -(mousesens - 100));
-                txt_print(230, 20, SPR_SMALLFONTS, textbuf);
+                txt_print(283, 150, SPR_SMALLFONTS, textbuf);
 
-                txt_print(230, 70, SPR_SMALLFONTS, controlschemetext[controlscheme]);
+                txt_print(268, 140, SPR_SMALLFONTS, controlschemetext[controlscheme]);
 
                 txt_print(145, 170, SPR_SMALLFONTS, "USE UP & DOWN TO NAVIGATE");
                 txt_print(145, 180, SPR_SMALLFONTS, "LEFT & RIGHT TO CHANGE MOUSE SENS");
