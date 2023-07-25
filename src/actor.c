@@ -25,17 +25,32 @@ int strafeleft = KEY_KP1;
 int straferight = KEY_KP3;
 int strafekey = KEY_ALT;
 int walkkey = KEY_LEFTSHIFT;
+
 int attackkey = KEY_SPACE;
 int nextweap = KEY_ENTER;
 int prevweap = KEY_RIGHTSHIFT;
+
 int pausekey = KEY_P;
 int linekey = KEY_S;
 int musickey = KEY_M;
 int noteskey = KEY_V;
+
 int redkey = KEY_R;
 int greenkey = KEY_G;
 int bluekey = KEY_B;
 int yellowkey = KEY_Y;
+
+int fistkey = KEY_F1;
+int cat5key = KEY_F2;
+int bndkey = KEY_F3;
+int croskey = KEY_F4;
+int pistkey = KEY_F5;
+int shotkey = KEY_F6;
+int uzikey = KEY_F7;
+int grenkey = KEY_F8;
+int bazokey = KEY_F9;
+int scankey = KEY_F10;
+
 unsigned mouseattack = MOUSEB_LEFT;
 unsigned mousenextweap = MOUSEB_RIGHT;
 unsigned mouseprevweap = MOUSEB_MIDDLE;
@@ -1333,17 +1348,17 @@ void playerattack(ACTOR *aptr)
                         } while (!ammo[weapon]);
                         if (weapon != oldweapon) playfx(FXCHAN_FIST, SMP_FIST1, 22050, 48, 128);
                 }
-                /* Direct change of weapon with function keys */
-                if (kbd_checkkey(KEY_F1)) weapon = WEAP_FISTS;
-                if (kbd_checkkey(KEY_F2) && ammo[WEAP_CAT5]) weapon = WEAP_CAT5;
-                if (kbd_checkkey(KEY_F3) && ammo[WEAP_BND]) weapon = WEAP_BND;
-                if (kbd_checkkey(KEY_F4) && ammo[WEAP_PISTOL]) weapon = WEAP_PISTOL;
-                if (kbd_checkkey(KEY_F5) && ammo[WEAP_SHOTGUN]) weapon = WEAP_SHOTGUN;
-                if (kbd_checkkey(KEY_F6) && ammo[WEAP_UZI]) weapon = WEAP_UZI;
-                if (kbd_checkkey(KEY_F7) && ammo[WEAP_GRENADE]) weapon = WEAP_GRENADE;
-                if (kbd_checkkey(KEY_F8) && ammo[WEAP_BAZOOKA]) weapon = WEAP_BAZOOKA;
-                if (kbd_checkkey(KEY_F9) && ammo[WEAP_CROSSBOW]) weapon = WEAP_CROSSBOW;
-                if (kbd_checkkey(KEY_F10) && ammo[WEAP_SCANNER]) weapon = WEAP_SCANNER;
+                /* Direct change of weapon with bound keys */
+                if (kbd_checkkey(fistkey)) weapon = WEAP_FISTS;
+                if (kbd_checkkey(cat5key) && ammo[WEAP_CAT5]) weapon = WEAP_CAT5;
+                if (kbd_checkkey(bndkey) && ammo[WEAP_BND]) weapon = WEAP_BND;
+                if (kbd_checkkey(pistkey) && ammo[WEAP_PISTOL]) weapon = WEAP_PISTOL;
+                if (kbd_checkkey(shotkey) && ammo[WEAP_SHOTGUN]) weapon = WEAP_SHOTGUN;
+                if (kbd_checkkey(uzikey) && ammo[WEAP_UZI]) weapon = WEAP_UZI;
+                if (kbd_checkkey(grenkey) && ammo[WEAP_GRENADE]) weapon = WEAP_GRENADE;
+                if (kbd_checkkey(bazokey) && ammo[WEAP_BAZOOKA]) weapon = WEAP_BAZOOKA;
+                if (kbd_checkkey(croskey) && ammo[WEAP_CROSSBOW]) weapon = WEAP_CROSSBOW;
+                if (kbd_checkkey(scankey) && ammo[WEAP_SCANNER]) weapon = WEAP_SCANNER;
         }
 
         /* Scanner battery handling */

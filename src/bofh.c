@@ -119,12 +119,16 @@ HISCORE_ENTRY hiscore[] = {{"BURZUM", 10000},
 
 char *menutext[] = {"START GAME", "OPTIONS", "HIGHSCORE", "INTRO", "EXIT"};
 char *difftext[] = {"PRACTICE", "EASY", "MEDIUM", "HARD", "INSANE"};
-#define KEYTEXTNUM 23
+#define KEYTEXTNUM 33
+#define BINDABLEKEYSNUM 29
 char *keytext[KEYTEXTNUM] = {
         "MOVE FWD", "MOVE BWD", "TURN LEFT", "TURN RIGHT", "STRAFE LEFT",
         "STRAFE RIGHT", "STRAFE KEY", "WALK KEY", "ATTACK", "NEXT WEAPON",
         "PREV WEAPON", "PAUSE KEY", "TOGGLE SIGHT LINE", "TOGGLE MUSIC",
         "VIEW NOTES", "CUT RED", "CUT GREEN", "CUT BLUE", "CUT YELLOW",
+        "EQUIP FISTS", "EQUIP CAT5 WHIP", "EQUIP B&D", "EQUIP PISTOL",
+        "EQUIP SHOTGUN", "EQUIP UZI", "EQUIP GRENADE", "EQUIP BAZOOKA",
+        "EQUIP CROSSBOW", "EQUIP SCANNER",
         "MOUSE ATTACK", "MOUSE NEXT WEAPON", "MOUSE PREV WEAPON",
         "CONTROL SCHEME:"
 };
@@ -596,6 +600,16 @@ void loadconfig(void)
         fread(&greenkey,    sizeof greenkey,    1, handle);
         fread(&bluekey,     sizeof bluekey,     1, handle);
         fread(&yellowkey,   sizeof yellowkey,   1, handle);
+        fread(&fistkey,     sizeof fistkey,     1, handle);
+        fread(&cat5key,     sizeof cat5key,     1, handle);
+        fread(&bndkey,      sizeof bndkey,      1, handle);
+        fread(&pistkey,     sizeof pistkey,     1, handle);
+        fread(&shotkey,     sizeof shotkey,     1, handle);
+        fread(&uzikey,      sizeof uzikey,      1, handle);
+        fread(&grenkey,     sizeof grenkey,     1, handle);
+        fread(&bazokey,     sizeof bazokey,     1, handle);
+        fread(&croskey,     sizeof croskey,     1, handle);
+        fread(&scankey,     sizeof scankey,     1, handle);
         fread(&mouseattack, sizeof mouseattack, 1, handle);
         fread(&mousenextweap, sizeof mousenextweap, 1, handle);
         fread(&mousenextweap, sizeof mousenextweap, 1, handle);
@@ -631,6 +645,16 @@ void saveconfig(void)
         fwrite(&greenkey,    sizeof greenkey,    1, handle);
         fwrite(&bluekey,     sizeof bluekey,     1, handle);
         fwrite(&yellowkey,   sizeof yellowkey,   1, handle);
+        fwrite(&fistkey,     sizeof fistkey,     1, handle);
+        fwrite(&cat5key,     sizeof cat5key,     1, handle);
+        fwrite(&bndkey,      sizeof bndkey,      1, handle);
+        fwrite(&pistkey,     sizeof pistkey,     1, handle);
+        fwrite(&shotkey,     sizeof shotkey,     1, handle);
+        fwrite(&uzikey,      sizeof uzikey,      1, handle);
+        fwrite(&grenkey,     sizeof grenkey,     1, handle);
+        fwrite(&bazokey,     sizeof bazokey,     1, handle);
+        fwrite(&croskey,     sizeof croskey,     1, handle);
+        fwrite(&scankey,     sizeof scankey,     1, handle);
         fwrite(&mouseattack, sizeof mouseattack, 1, handle);
         fwrite(&mousenextweap, sizeof mousenextweap, 1, handle);
         fwrite(&mouseprevweap, sizeof mouseprevweap, 1, handle);
@@ -897,14 +921,14 @@ int optionsmenu(void)
                     ((mouseb & MOUSEB_LEFT) && (!(prevmouseb & MOUSEB_LEFT))))
                 {
                         playfx(FXCHAN_ENEMYSHOOT, SMP_SHOTGUN, 22050, 64, 128);
-                        if (18 < keyselect && keyselect < 22)
+                        if (BINDABLEKEYSNUM <= keyselect && keyselect < KEYTEXTNUM - 1)
                         {
                                 buttoncode = buttondialog();
-                                if (keyselect == 19) mouseattack = buttoncode;
-                                if (keyselect == 20) mousenextweap = buttoncode;
-                                if (keyselect == 21) mouseprevweap = buttoncode;
+                                if (keyselect == BINDABLEKEYSNUM) mouseattack = buttoncode;
+                                if (keyselect == BINDABLEKEYSNUM+1) mousenextweap = buttoncode;
+                                if (keyselect == BINDABLEKEYSNUM+2) mouseprevweap = buttoncode;
                         }
-                        else if (keyselect == 22)
+                        else if (keyselect == KEYTEXTNUM - 1)
                         {
                                 controlscheme = (controlscheme + 1) % CTRLNUM;
                         }
@@ -932,6 +956,16 @@ int optionsmenu(void)
                                         if (keyselect == 16) greenkey = keycode;
                                         if (keyselect == 17) bluekey = keycode;
                                         if (keyselect == 18) yellowkey = keycode;
+                                        if (keyselect == 19) fistkey = keycode;
+                                        if (keyselect == 20) cat5key = keycode;
+                                        if (keyselect == 21) bndkey = keycode;
+                                        if (keyselect == 22) pistkey = keycode;
+                                        if (keyselect == 23) shotkey = keycode;
+                                        if (keyselect == 24) uzikey = keycode;
+                                        if (keyselect == 25) grenkey = keycode;
+                                        if (keyselect == 26) bazokey = keycode;
+                                        if (keyselect == 27) croskey = keycode;
+                                        if (keyselect == 28) scankey = keycode;
                                 }
                         }
                 }

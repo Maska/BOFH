@@ -93,17 +93,32 @@ extern int strafeleft;
 extern int straferight;
 extern int strafekey;
 extern int walkkey;
+
 extern int attackkey;
 extern int nextweap;
 extern int prevweap;
+
 extern int pausekey;
 extern int linekey;
 extern int musickey;
 extern int noteskey;
+
 extern int redkey;
 extern int greenkey;
 extern int bluekey;
 extern int yellowkey;
+
+extern int fistkey;
+extern int cat5key;
+extern int bndkey;
+extern int croskey;
+extern int pistkey;
+extern int shotkey;
+extern int uzikey;
+extern int grenkey;
+extern int bazokey;
+extern int scankey;
+
 extern unsigned mouseattack;
 extern unsigned mousenextweap;
 extern unsigned mouseprevweap;
