@@ -4,7 +4,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 #include "bme_main.h"
 #include "bme_gfx.h"

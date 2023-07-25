@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include "bme_err.h"
 #include "bme_main.h"
 #include "bme_snd.h"
