@@ -22,3 +22,7 @@ Run `./build.sh` to use it.
 After building, the folder *release* contains everything required for a distributable game.
 To be able to run the game,
 you need to have the same or newer GLIBC version as was used in the build.
+
+## Troubleshooting
+
+See *release/bofh.txt* for instuctions.

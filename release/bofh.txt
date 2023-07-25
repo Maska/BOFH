@@ -12,13 +12,29 @@ of BOFH consider them now being under the same
 license too.
 
 
-HOW TO RUN:
+HOW TO RUN ON WINDOWS:
 
 Simply run BOFH.EXE. It is a 32-bit Windows program
 that will run on Windows 95/98/NT4/2000/ME. In theory
 it runs on a 386 but at least a fast 486 or Pentium
 is required for reasonably smooth gameplay. DirectX
 version 2 or better is required.
+
+HOW TO RUN ON LINUX:
+
+Simply run ./bofh. GLIBC 2.19 or later and SDL 1.2 are
+required. If BOFH fails to start due to not finding a
+suitable GLIBC version, upgrade your system or rebuild
+BOFH on your system. If BOFH can't find libSDL-1.2,
+make sure you have it (or libsdl1.2-compat) installed.
+Due to architecture issues, finding the library might
+still need manual effort. Give the path manually:
+    export LD_LIBRARY_PATH="/path/to/sdl12-compat/
+and then run ./bofh. The library can e.g. be at
+    /usr/lib/x86_64-linux-gnu/sdl12-compat/
+
+
+SYSTEM REQUIREMENTS:
 
 BOFH requires about 5MB of memory to run.
 
