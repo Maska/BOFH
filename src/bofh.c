@@ -1,5 +1,5 @@
 /*
- * BOFH: Servers Under Siege V1.5
+ * BOFH: Servers Under Siege
  * ------------------------------
  * Action game by Lasse Öörni (Cadaver), Kalle Niemitalo & Olli Niemitalo
  * (Yehar) in year 2000. Music by Olli Niemitalo & Tuomas Mäkelä (Kuunvarjo).

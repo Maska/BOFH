@@ -1,6 +1,6 @@
            -------------------------
                    B O F H :
-           Servers Under Siege V1.7
+           Servers Under Siege V1.7.1
            -------------------------
                 An action game
 
@@ -316,6 +316,10 @@ V1.7
 * Bindable keys
 * New control sceme option
 * Crash fixes
+
+V1.7.1
+
+* Direct weapon equip binds
 
 
 OFFICIAL "HOMEPAGE":
