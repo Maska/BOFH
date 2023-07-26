@@ -411,7 +411,7 @@ void loadconfig(void);
 void saveconfig(void);
 int initstuff(void);
 int menu(void);
-int restartdialog(void);
+int confirmationdialog(char*);
 int selectdifficulty(void);
 int optionsmenu(void);
 int keydialog(void);

@@ -697,8 +697,8 @@ int menu(void)
                                         {
                                         score = 0;
                                         game(missionlist[missionindex]);
-                                        if (((checkhiscore() == 1) && (restartdialog()))
-                                                        || (restartdialog())) return 1;
+                                        if (((checkhiscore() == 1) && !confirmationdialog("RESTART?"))
+                                            || !confirmationdialog("RESTART?")) return 1;
                                         }
                                 }
                         }
@@ -736,7 +736,7 @@ int menu(void)
         }
 }
 
-int restartdialog(void)
+int confirmationdialog(char* what)
 {
         kbd_getascii();
         getgamespeed();
@@ -748,12 +748,12 @@ int restartdialog(void)
                 key = kbd_getkey();
 
                 checkglobalkeys();
-                if ((key == KEY_N) || (key == KEY_ESC))  return 1;
-
+                if ((key == KEY_Y))  return 1;
                 if (key != 0) return 0;
 
                 fireeffect();
-                txt_printcenter(80, SPR_FONTS, "RESTART? Y/N");
+                sprintf(textbuf, "%s Y/N", what);
+                txt_printcenter(80, SPR_FONTS, textbuf);
                 gfx_updatepage();
         }
 }
@@ -1180,7 +1180,8 @@ void game(char *missionname)
                 {
                         snd_stopsample(FXCHAN_BND);
                         snd_stopsample(FXCHAN_LIFT);
-                        return;
+                        paused = 1;
+                        if (confirmationdialog("FORFEIT?")) return;
                 }
 
                 if (victory > 200)
